@@ -66,3 +66,9 @@ const (
 	G1
 	H1
 )
+
+const (
+	Black int = iota
+	White
+
+)

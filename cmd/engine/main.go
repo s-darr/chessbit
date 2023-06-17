@@ -2,7 +2,6 @@ package main
 
 import (
 	"chessbit/pkg/bitboard"
-	"fmt"
 )
 
 
@@ -15,9 +14,11 @@ func main() {
     bitboard.SetBit(&testBitboard, bitboard.E2);
     bitboard.SetBit(&testBitboard, bitboard.C3);
     bitboard.SetBit(&testBitboard, bitboard.F2);
+    bitboard.PrintBitboard(testBitboard)
    
-    a := bitboard.GetBit(testBitboard,52)
-    fmt.Println(a)
+    bitboard.PopBit(&testBitboard, bitboard.E2);
+
+    
     bitboard.PrintBitboard(testBitboard)
 
 
