@@ -21,7 +21,7 @@ func PrintBitboard(bitboard uint64) {
 
 			// Print bit state (either 1 or 0)
 			fmt.Printf(" %d", (bitboard>>square)&1)
-		}
+		} 
 
 		// Print new line every rank
 		fmt.Println()
