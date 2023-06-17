@@ -4,6 +4,8 @@ import "fmt"
 
 
 
+
+
 func PrintBitboard(bitboard uint64) {
 	fmt.Println()
 
@@ -20,7 +22,11 @@ func PrintBitboard(bitboard uint64) {
 			}
 
 			// Print bit state (either 1 or 0)
-			fmt.Printf(" %d", (bitboard>>square)&1)
+			if GetBit(bitboard, square) != 0 {
+				fmt.Printf(" %d", 1)
+			} else {
+				fmt.Printf(" %d", 0)
+			}
 		} 
 
 		// Print new line every rank
@@ -32,4 +38,19 @@ func PrintBitboard(bitboard uint64) {
 
 	// Print bitboard as unsigned decimal number
 	fmt.Printf("\n     Bitboard: %d\n\n", bitboard)
+}
+
+func SetBit(bitboard *uint64, square int) {
+	*bitboard |= (1 << square)
+
+}
+
+func GetBit(bitboard uint64, square int) uint64 {
+	return bitboard & (1 << square)
+}
+
+func PopBit(bitboard *uint64, square int) {
+    if GetBit(*bitboard, square) != 0 {
+        *bitboard ^= (1 << square)
+    }
 }
