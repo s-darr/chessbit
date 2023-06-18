@@ -12,7 +12,7 @@ func main() {
 	attacks.InitLeapersAttacks()
 
 	for square := 0; square < 64; square++ {
-		bitboard.Print(attacks.KingAttacks[square])
+		bitboard.Print(attacks.MaskRookAttacks(square))
 	}
 
 }
