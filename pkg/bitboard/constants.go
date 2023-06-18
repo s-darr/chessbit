@@ -67,6 +67,7 @@ const (
 	H1
 )
 
+// sides to move (colours)
 const (
 	Black int = iota
 	White

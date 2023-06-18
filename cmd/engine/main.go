@@ -8,18 +8,22 @@ import (
 
 
 func main() {
-    
-    var testBitboard uint64
 
-    bitboard.SetBit(&testBitboard, bitboard.E2);
-    bitboard.SetBit(&testBitboard, bitboard.C3);
-    bitboard.SetBit(&testBitboard, bitboard.F2);
-    bitboard.PrintBitboard(testBitboard)
-   
-    bitboard.PopBit(&testBitboard, bitboard.E2);
+    for rank := 0; rank < 8; rank++ {
+        for file:=0; file < 8; file++ {
+            square := rank * 8 + file
 
+            if file != 0 {
+                bitboard.SetBit(&bitboard.NotAFile, square)
+
+            }
+            
+        }
+    }
     
-    bitboard.PrintBitboard(testBitboard)
+   // bitboard.PrintBitboard(bitboard.MaskPawnAttacks(bitboard.E4,bitboard.White))
+    bitboard.PrintBitboard(bitboard.NotAFile)
+    
 
 
 

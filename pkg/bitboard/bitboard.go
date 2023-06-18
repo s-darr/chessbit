@@ -54,3 +54,50 @@ func PopBit(bitboard *uint64, square int) {
         *bitboard ^= (1 << square)
     }
 }
+
+/*******************************\
+=================================
+
+ATTACKS
+
+=================================
+\*********************************/
+
+// not a file constant
+
+var NotAFile uint64 = 0
+
+
+
+
+// pawn attacks table [side][square]
+
+var pawnAttacks [2][64] uint64
+
+func MaskPawnAttacks(square int, side int) uint64 {
+
+	// results attack bitboard
+	var attacks uint64 = 0
+
+	// piece bitboard
+	var bitboard uint64 = 0
+
+	// set piece on board
+	SetBit(&bitboard,square)
+	
+
+	// white pawns or black
+	if side == 1 {
+		attacks |= bitboard >> 7
+
+	}
+	
+
+
+	// return attack map
+	return attacks
+
+
+
+}
+
