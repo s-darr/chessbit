@@ -1,5 +1,6 @@
 package bitboard
 
+// chess board where A8 represents 0 and is incremented
 const (
 	A8 int = iota
 	B8
@@ -65,11 +66,4 @@ const (
 	F1
 	G1
 	H1
-)
-
-// sides to move (colours)
-const (
-	Black int = iota
-	White
-
 )

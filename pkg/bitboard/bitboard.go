@@ -2,11 +2,7 @@ package bitboard
 
 import "fmt"
 
-
-
-
-
-func PrintBitboard(bitboard uint64) {
+func Print(bitboard uint64) {
 	fmt.Println()
 
 	// Loop over board ranks
@@ -27,7 +23,7 @@ func PrintBitboard(bitboard uint64) {
 			} else {
 				fmt.Printf(" %d", 0)
 			}
-		} 
+		}
 
 		// Print new line every rank
 		fmt.Println()
@@ -50,54 +46,7 @@ func GetBit(bitboard uint64, square int) uint64 {
 }
 
 func PopBit(bitboard *uint64, square int) {
-    if GetBit(*bitboard, square) != 0 {
-        *bitboard ^= (1 << square)
-    }
-}
-
-/*******************************\
-=================================
-
-ATTACKS
-
-=================================
-\*********************************/
-
-// not a file constant
-
-var NotAFile uint64 = 0
-
-
-
-
-// pawn attacks table [side][square]
-
-var pawnAttacks [2][64] uint64
-
-func MaskPawnAttacks(square int, side int) uint64 {
-
-	// results attack bitboard
-	var attacks uint64 = 0
-
-	// piece bitboard
-	var bitboard uint64 = 0
-
-	// set piece on board
-	SetBit(&bitboard,square)
-	
-
-	// white pawns or black
-	if side == 1 {
-		attacks |= bitboard >> 7
-
+	if GetBit(*bitboard, square) != 0 {
+		*bitboard ^= (1 << square)
 	}
-	
-
-
-	// return attack map
-	return attacks
-
-
-
 }
-
