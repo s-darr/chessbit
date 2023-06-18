@@ -82,11 +82,14 @@ func MaskPawnAttacks(side int, square int) uint64 {
 func InitLeapersAttacks() {
 	// loop over 64 board squares
 	for square := 0; square < 64; square++ {
-
+		// init pawn attacks
 		PawnAttacks[White][square] = MaskPawnAttacks(White, square)
 		PawnAttacks[Black][square] = MaskPawnAttacks(Black, square)
 
 		// init knight attacks
 		KnightAttacks[square] = MaskKnightAttacks(square)
+
+		// init king attacks
+		KingAttacks[square] = MaskKingAttacks(square)
 	}
 }
