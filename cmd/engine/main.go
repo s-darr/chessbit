@@ -1,6 +1,7 @@
 package main
 
 import (
+	"chessbit/pkg/attacks"
 	"chessbit/pkg/bitboard"
 )
 
@@ -8,8 +9,12 @@ func main() {
 
 	// init leaper pieces attack
 
-	bitboard.InitLeapersAttacks()
+	attacks.InitLeapersAttacks()
 
-	bitboard.Print(bitboard.MaskPawnAttacks(bitboard.Black, bitboard.H4))
+	for square := 0; square < 64; square++ {
+		bitboard.Print(attacks.KnightAttacks[square])
+	}
+
+	//bitboard.Print(attacks.MaskKnightAttacks(bitboard.D4))
 
 }

@@ -1,4 +1,6 @@
-package bitboard
+package attacks
+
+import Bitboard "chessbit/pkg/bitboard"
 
 /*******************************\
 =================================
@@ -23,12 +25,6 @@ ATTACKS
 a b c d e f g h
 \*********************************/
 
-// sides to move
-const (
-	White int = 0
-	Black int = 1
-)
-
 // not A file constant (decimal)
 const NotAFile uint64 = 18374403900871474942
 
@@ -43,7 +39,7 @@ const NotABFile uint64 = 18229723555195321596
 
 // pawn attacks table [side][square]
 
-var pawnAttacks [2][64]uint64
+var PawnAttacks [2][64]uint64
 
 func MaskPawnAttacks(side int, square int) uint64 {
 
@@ -54,12 +50,13 @@ func MaskPawnAttacks(side int, square int) uint64 {
 	var bitboard uint64 = 0
 
 	// set piece on bitboard
-	SetBit(&bitboard, square)
+	Bitboard.SetBit(&bitboard, square)
 
 	// white pawns or black (0 for white, 1 for black)
 	if side == 0 {
 		attacks |= bitboard >> 7
-		if (bitboard>>7)&NotAFile != 0 { // check if valid attack
+		// generate pawn attacks
+		if (bitboard>>7)&NotAFile != 0 {
 			attacks |= bitboard >> 7
 		}
 		if (bitboard>>9)&NotHFile != 0 {
@@ -80,14 +77,16 @@ func MaskPawnAttacks(side int, square int) uint64 {
 
 }
 
-// initialise leaper pieces attack
+// initialise leaper pieces attack (does not need to go in pawn.go)
 
 func InitLeapersAttacks() {
 	// loop over 64 board squares
 	for square := 0; square < 64; square++ {
 
-		pawnAttacks[White][square] = MaskPawnAttacks(White, square)
-		pawnAttacks[Black][square] = MaskPawnAttacks(Black, square)
+		PawnAttacks[White][square] = MaskPawnAttacks(White, square)
+		PawnAttacks[Black][square] = MaskPawnAttacks(Black, square)
 
+		// init knight attacks
+		KnightAttacks[square] = MaskKnightAttacks(square)
 	}
 }
