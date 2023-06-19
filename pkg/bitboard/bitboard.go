@@ -1,6 +1,9 @@
 package bitboard
 
-import "fmt"
+import (
+	"fmt"
+	"math/bits"
+)
 
 func Print(bitboard uint64) {
 	fmt.Println()
@@ -49,4 +52,13 @@ func PopBit(bitboard *uint64, square int) {
 	if GetBit(*bitboard, square) != 0 {
 		*bitboard ^= (1 << square)
 	}
+}
+
+// function to get the index of the least significant bit
+func LSBIndex(bitboard uint64) int {
+	if bitboard == 0 {
+		return -1
+	}
+	lsb := bitboard & -bitboard // trick to isolate the lsb
+	return bits.TrailingZeros64(lsb)
 }
