@@ -2,7 +2,7 @@ package main
 
 import (
 	"chessbit/pkg/attacks"
-	"chessbit/pkg/bitboard"
+	b "chessbit/pkg/bitboard"
 )
 
 func main() {
@@ -11,9 +11,15 @@ func main() {
 
 	attacks.InitLeapersAttacks()
 
-	//for square := 0; square < 64; square++ {
-	//	bitboard.Print(attacks.MaskRookAttacks(square))
-	var a uint64 = 0
-	bitboard.Print(attacks.BishopAttacksOnTheFly(bitboard.D4, a))
+	// init occupancy bitboard
+	var block uint64 = 0
+	b.SetBit(&block, b.D7)
+	b.SetBit(&block, b.D2)
+	b.SetBit(&block, b.B4)
+	b.SetBit(&block, b.G4)
+
+	b.Print(block)
+
+	b.Print(attacks.RookAttacksOnTheFly(b.D4, block))
 
 }
