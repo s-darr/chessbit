@@ -34,3 +34,31 @@ func MaskBishopAttacks(square int) uint64 {
 	return attacks
 
 }
+func BishopAttacksOnTheFly(square int, block uint64) uint64 {
+	// results attack bitboard
+	var attacks uint64 = 0
+
+	// init ranks & files
+	var r, f int
+
+	// init target rank & files
+	tr := square / 8
+	tf := square % 8
+
+	// generate bishop atttacks
+	for r, f = tr+1, tf+1; r <= 7 && f <= 7; r, f = r+1, f+1 {
+		attacks |= (1 << (r*8 + f))
+	}
+	for r, f = tr-1, tf+1; r >= 0 && f <= 7; r, f = r-1, f+1 {
+		attacks |= (1 << (r*8 + f))
+	}
+	for r, f = tr+1, tf-1; r <= 7 && f >= 0; r, f = r+1, f-1 {
+		attacks |= (1 << (r*8 + f))
+	}
+	for r, f = tr-1, tf-1; r >= 0 && f >= 0; r, f = r-1, f-1 {
+		attacks |= (1 << (r*8 + f))
+	}
+
+	return attacks
+
+}

@@ -11,8 +11,9 @@ func main() {
 
 	attacks.InitLeapersAttacks()
 
-	for square := 0; square < 64; square++ {
-		bitboard.Print(attacks.MaskRookAttacks(square))
-	}
+	//for square := 0; square < 64; square++ {
+	//	bitboard.Print(attacks.MaskRookAttacks(square))
+	var a uint64 = 0
+	bitboard.Print(attacks.BishopAttacksOnTheFly(bitboard.D4, a))
 
 }
