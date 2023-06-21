@@ -4,6 +4,7 @@ import (
 	"chessbit/pkg/attacks"
 	b "chessbit/pkg/bitboard"
 	"fmt"
+	"math/bits"
 )
 
 func main() {
@@ -12,15 +13,17 @@ func main() {
 
 	attacks.InitLeapersAttacks()
 
-	var block uint64 = 0
-	b.SetBit(&block, b.D7)
-	//b.SetBit(&block, b.D2)
-	//b.SetBit(&block, b.B4)
-	//b.SetBit(&block, b.G4)
+	var attackMask uint64 = attacks.MaskRookAttacks(b.A1)
 
-	b.Print(block)
-	fmt.Printf("index: %d    coordinate: %s\n", b.LSBIndex(block), b.SquareToCoordinate[b.LSBIndex((block))])
+    for x:=0; x<4096; x++{
 
-	//b.Print(attacks.RookAttacksOnTheFly(b.D4, block))
+        var occupancy uint64 = b.SetOccupancy(x,bits.OnesCount64(attackMask), attackMask)
+        b.Print(occupancy)
+        fmt.Scanln()
+    }
+
+    
+
 
 }
+

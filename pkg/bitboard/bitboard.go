@@ -62,3 +62,31 @@ func LSBIndex(bitboard uint64) int {
 	lsb := bitboard & -bitboard // trick to isolate the lsb
 	return bits.TrailingZeros64(lsb)
 }
+
+// set occupancies
+func SetOccupancy(index int, bitsInMask int, attackMask uint64) uint64 {
+
+	// occupancy map
+	var occupancy uint64 = 0
+
+	// loop over the range of bits within attack mask
+	for count:=0; count < bitsInMask; count++ {
+		// Get ls1b index of attacks mask
+		square  := LSBIndex(attackMask)
+
+		// pop LS1B in attack map
+		PopBit(&attackMask, square)
+
+		// make sure occupancy is in board
+		if (index & (1 << count) != 0){
+			occupancy |= (1 << square)
+
+
+		}
+
+	}
+
+	//return occupancy map
+	return occupancy
+
+}
