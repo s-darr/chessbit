@@ -2,28 +2,35 @@ package main
 
 import (
 	"chessbit/pkg/attacks"
-	b "chessbit/pkg/bitboard"
 	"fmt"
-	"math/bits"
 )
+
+var state uint = 3850519659
+
+func GetRandomNumber(state *uint) uint {
+	*state ^= *state << 13
+	*state ^= *state >> 17
+	*state ^= *state << 5
+	return *state
+}
 
 func main() {
 
 	// init leaper pieces attack
 
 	attacks.InitLeapersAttacks()
+	// for each square count the relevant mask occupancy bits for bishop attaks
+	//for rank := 0; rank < 8; rank++ {
+	//	for file := 0; file < 8; file++ {
+	//		square := rank*8 + file
 
-	var attackMask uint64 = attacks.MaskRookAttacks(b.A1)
+	//		fmt.Printf("%d, ", bits.OnesCount64(attacks.MaskRookAttacks(square)))
+	//	}
+	//	fmt.Printf("\n")
 
-    for x:=0; x<4096; x++{
-
-        var occupancy uint64 = b.SetOccupancy(x,bits.OnesCount64(attackMask), attackMask)
-        b.Print(occupancy)
-        fmt.Scanln()
-    }
-
-    
-
+	//}
+	fmt.Printf("Before xorshift: %d\n", state)
+	state := GetRandomNumber(&state)
+	fmt.Printf("After xorshift: %d\n", state)
 
 }
-
